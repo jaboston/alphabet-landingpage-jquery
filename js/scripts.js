@@ -3,10 +3,24 @@ var pokemonRepository = (function () {
 
   return {
     add: function(pokemon) {
-      repository.push(pokemon);
+
+      // check every value explicitly. Make sure there is no monkey business.
+      if(typeof(pokemon.height)==typeof(0)
+      &&
+      typeof(pokemon.name)==typeof("")
+      &&
+      typeof(pokemon.type)==typeof([])
+      )
+        repository.push(pokemon);
+        // ironic eh
+      else throw ": You didn't catch this pokemon!";
     },
     getAll: function() {
       return repository;
+    },
+    // returns the object for the pokemon name that you want.
+    filter: function(name) {
+      return repository.filter(value => value.name == name);
     }
   }
 }

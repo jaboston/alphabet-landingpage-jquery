@@ -89,6 +89,7 @@ button {
 
 .button--pokemon {
   border: 0;
+  padding: var(--theme-default-padding);
   background-color: var(--item-background-color);
   :hover {
     color: var(--primary-color);
@@ -96,6 +97,7 @@ button {
   :selected {
     color: var(--primary-color);
   }
+  width:100%;
 }
 
 
@@ -111,9 +113,16 @@ head {
   flex: auto;
 }
 
-// It is important to make sure that the pokedex body and the full page grid are not padded otherwise it looks bad. 
+// It is important to make sure that the pokedex body and the full page grid are not padded otherwise it looks bad.
 .pokedex-body, .full-page-grid {
   padding: 0;
+  background-color: var(--background-color);
+}
+
+// set the minimum and maximum width so the layout doesn't look pants.
+.pokedex-body {
+  min-width: 250px;
+  max-width: 400px;
 }
 
 h1 {
@@ -121,6 +130,11 @@ h1 {
   animation-iteration-count: 1;
   animation-direction: alternate;
   animation-timing-function: linear;
+}
+
+h3 {
+  text-align: left;
+  padding-left: var(--theme-default-padding);
 }
 
 .navigation-list__item--active {
@@ -211,7 +225,7 @@ h1 {
 .project-grid__item {
   background-color: lightgray;
   line-height: normal;
-  padding: var(--theme-default-padding);
+  padding: 0;
   /* Set width to auto*/
   width: 100%;
   :hover{

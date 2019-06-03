@@ -191,7 +191,7 @@ h3 {
   display: grid;
   /* creates a column for every '1fr' i specify */
   grid-template-columns: 1fr;
-  grid-gap: 5px;
+  grid-gap: 10px;
   background-color: var(--background-color);
 }
 
@@ -256,7 +256,6 @@ h3 {
 @media all and (max-width: 500px) {
   .project-grid {
     grid-template-columns: 1fr;
-    grid-gap: 10px;
   }
   .project-grid__item:last-child {
     grid-column: auto / auto;

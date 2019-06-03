@@ -117,12 +117,16 @@ head {
 .pokedex-body, .full-page-grid {
   padding: 0;
   background-color: var(--background-color);
+
 }
 
 // set the minimum and maximum width so the layout doesn't look pants.
 .pokedex-body {
   min-width: 250px;
   max-width: 400px;
+  float: left;
+  width: 100%;
+  margin-left: 0;
 }
 
 h1 {

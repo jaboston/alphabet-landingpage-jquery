@@ -54,22 +54,22 @@ var pokemonRepository = (function () {
 
   //iterate through the repository looking for pokemons.
   for(var i = 0; i < pokemonRepository.getAll().length; i++){
-    document.write("<h3>- " + pokemonRepository.getAll()[i].name + "</h3>");
+    // document.write("<h3>- " + pokemonRepository.getAll()[i].name + "</h3>");
     //using foreach
     Object.keys(pokemonRepository.getAll()[i]).forEach(function(property) {
       // dont repeat name
       if(property != "name"){
-        document.write("<div class='stats'>" + property + ": " + pokemonRepository.getAll()[i][property] + "</div>");
+        // document.write("<div class='stats'>" + property + ": " + pokemonRepository.getAll()[i][property] + "</div>");
       }
-      document.write("<br/>");
+      // document.write("<br/>");
     });
 
     // check if the height is that of a big boi
     if(pokemonRepository.getAll()[i].height > 100){
-      document.write("wow! " + pokemonRepository.getAll()[i].height + "cm... Thats a big boi!")
-      document.write("</br>")
+      // document.write("wow! " + pokemonRepository.getAll()[i].height + "cm... Thats a big boi!")
+      // document.write("</br>")
     } else {
-      document.write("just a little boi. it should stay in its pokeball out of shame.")
-      document.write("</br>")
+      // document.write("just a little boi. it should stay in its pokeball out of shame.")
+      // document.write("</br>")
     }
   }

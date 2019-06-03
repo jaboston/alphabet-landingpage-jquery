@@ -3,9 +3,28 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Simple JS App</title>
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Quicksand">
+
+    <title>Pokedex</title>
   </head>
   <body>
-    <h2>The pokemons in your pokedex are:</h2> <script src="js/scripts.js"></script>
+    <div class="heading-grid">
+      <h4>Pokedex</h4><button class="button--search"><img alt="search icon" src="img/icon-search.svg" width="20" height="20"/></button>
+    </div>
+    <div class="project-grid">
+      <!-- pokemon name template -->
+      <div class="project-grid__item">
+        <button class="button--pokemon">
+          <div class="pokemon-name">Pokemon name</div>
+        </button>
+      </div>
+    </div>
   </body>
+  <!-- Main content -->
+
 </html>

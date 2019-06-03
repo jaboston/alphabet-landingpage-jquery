@@ -99,7 +99,7 @@ button {
 }
 
 
-div, body, head {
+div {
   padding: var(--theme-default-padding); /* Adds a 10px inner spacing to all sides*/
   /* margin: 10px; /* Adds a 10px outer spacing to all sides */
   margin: 0 auto;
@@ -109,6 +109,11 @@ div, body, head {
 
 head {
   flex: auto;
+}
+
+// It is important to make sure that the pokedex body and the full page grid are not padded otherwise it looks bad. 
+.pokedex-body, .full-page-grid {
+  padding: 0;
 }
 
 h1 {
@@ -186,8 +191,17 @@ h1 {
   background-color: var(--background-color);
 }
 
-/* Grid fallback*/
+/* pokedex full page grid */
+.full-page-grid {
+  display: grid;
+  /* creates a column for every '1fr' i specify */
+  grid-template-columns: 5fr 5fr;
+  grid-gap: 5px;
+  background-color: white;
+  height: 1200px;
+}
 
+/* Grid fallback*/
 .project-grid__item {
   display: inline-block;
   width: 33%;

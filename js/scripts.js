@@ -19,6 +19,22 @@ var pokemonRepository = (function () {
   var apiUrl = SITE_PROTOCOL + SITE_ADDRESS + SITE_API_PATH + SITE_ENDPOINT_POKEMON + SITE_PARAMETER_LIMIT + MAX_POKEMONS;
 
 
+  function loadDetails(item) {
+    var url = item.detailsUrl;
+    return fetch(url).then(function (response) {
+      return response.json();
+    }).then(function (details) {
+      // Now we add the details to the item
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.type = Object.keys(details.types);
+      console.log(typeof(item.type));
+      console.log(details.types);
+    }).catch(function (e) {
+      console.error(e);
+    });
+  }
+
   function loadList() {
     return fetch(apiUrl).then(function (response) {
       return response.json();
@@ -29,17 +45,16 @@ var pokemonRepository = (function () {
           name: item.name,
           detailsUrl: item.url,
           height: -1,
-          type: []
+          type: Object.keys({})
         };
         add(pokemon);
-      }).then(function (){
-        // once we know we have added all the available pokemons, it is safe to delete our original $pokemonTemplatedItem
-        // delete our original list item because aint nobody got time for that.
-        $listItem.parentElement.removeChild($listItem);
-      });
+      })
     }).catch(function (e) {
       console.error(e);
     });
+    // once we know we have added all the available pokemons, it is safe to delete our original $pokemonTemplatedItem
+    // delete our original list item because aint nobody got time for that.
+    $listItem.parentElement.removeChild($listItem);
   };
 
   function add(pokemon) {
@@ -47,8 +62,6 @@ var pokemonRepository = (function () {
     if(typeof(pokemon.height)==typeof(0)
     &&
     typeof(pokemon.name)==typeof("")
-    &&
-    typeof(pokemon.type)==typeof([])
     )
       repository.push(pokemon);
       // ironic eh
@@ -64,14 +77,17 @@ var pokemonRepository = (function () {
     filter: function(name) {
       return repository.filter(value => value.name == name);
     },
-    loadList: loadList
+    loadList: loadList,
+    loadDetails: loadDetails
   };
 }
 )();
 
 function showDetails(pokemon){
-  //TODO: show pokemon details when requested
-  console.log("name: " + pokemon.name + ", height: " + pokemon.height + ", type: " + pokemon.type + "");
+  pokemonRepository.loadDetails(pokemon).then(function (){
+    var type = pokemon.type;
+    console.log("name: " + pokemon.name + ", height: " + pokemon.height + ", type: " + pokemon.type + "");
+  });
 };
 
 function addListItem(pokemon){
@@ -79,8 +95,6 @@ function addListItem(pokemon){
   if(typeof(pokemon.height)==typeof(0)
   &&
   typeof(pokemon.name)==typeof("")
-  &&
-  typeof(pokemon.type)==typeof([])
   ){
 
   // clone our list item.
@@ -127,9 +141,9 @@ function addListItem(pokemon){
 
 
   // push our defined pokemons to the repository through our add function.
-  pokemonRepository.add(pikachu);
-  pokemonRepository.add(charmander);
-  pokemonRepository.add(bulbasaur);
+  // pokemonRepository.add(pikachu);
+  // pokemonRepository.add(charmander);
+  // pokemonRepository.add(bulbasaur);
 
   console.log(pokemonRepository.getAll());
 

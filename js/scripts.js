@@ -4,37 +4,75 @@ var $listItem = document.querySelector('.project-grid__item');
 
 
 var pokemonRepository = (function () {
+  // API constant
+  var MAX_POKEMONS = 150;
+
+  // URL constants
+  var SITE_PROTOCOL = "https://";
+  var SITE_ADDRESS = "pokeapi.co/";
+  var SITE_API_PATH = "api/v2/";
+  var SITE_ENDPOINT_POKEMON = "pokemon/";
+  var SITE_PARAMETER_LIMIT = "?limit=";
+
   var repository = [];
+  // construct our api url.
+  var apiUrl = SITE_PROTOCOL + SITE_ADDRESS + SITE_API_PATH + SITE_ENDPOINT_POKEMON + SITE_PARAMETER_LIMIT + MAX_POKEMONS;
+
+
+  function loadList() {
+    return fetch(apiUrl).then(function (response) {
+      return response.json();
+    }).then(function (json) {
+      json.results.forEach(function (item) {
+        console.log(item);
+        var pokemon = {
+          name: item.name,
+          detailsUrl: item.url,
+          height: -1,
+          type: []
+        };
+        add(pokemon);
+      }).then(function (){
+        // once we know we have added all the available pokemons, it is safe to delete our original $pokemonTemplatedItem
+        // delete our original list item because aint nobody got time for that.
+        $listItem.parentElement.removeChild($listItem);
+      });
+    }).catch(function (e) {
+      console.error(e);
+    });
+  };
+
+  function add(pokemon) {
+    // check every value explicitly. Make sure there is no monkey business.
+    if(typeof(pokemon.height)==typeof(0)
+    &&
+    typeof(pokemon.name)==typeof("")
+    &&
+    typeof(pokemon.type)==typeof([])
+    )
+      repository.push(pokemon);
+      // ironic eh
+    else throw ": You didn't catch this pokemon!";
+  }
 
   return {
-    add: function(pokemon) {
-
-      // check every value explicitly. Make sure there is no monkey business.
-      if(typeof(pokemon.height)==typeof(0)
-      &&
-      typeof(pokemon.name)==typeof("")
-      &&
-      typeof(pokemon.type)==typeof([])
-      )
-        repository.push(pokemon);
-        // ironic eh
-      else throw ": You didn't catch this pokemon!";
-    },
+    add: add,
     getAll: function() {
       return repository;
     },
     // returns the object for the pokemon name that you want.
     filter: function(name) {
       return repository.filter(value => value.name == name);
-    }
-  }
+    },
+    loadList: loadList
+  };
 }
 )();
 
 function showDetails(pokemon){
   //TODO: show pokemon details when requested
   console.log("name: " + pokemon.name + ", height: " + pokemon.height + ", type: " + pokemon.type + "");
-}
+};
 
 function addListItem(pokemon){
   // check the values are legit
@@ -64,8 +102,8 @@ function addListItem(pokemon){
   // insert our pokemon at the top.
   $projectGrid.insertBefore($pokemonTemplatedItem, $projectGrid.firstElementChild);
 
-  }
-}
+  };
+};
 
   var pikachu, bulbasaur, charmander;
   pikachu = {
@@ -95,16 +133,12 @@ function addListItem(pokemon){
 
   console.log(pokemonRepository.getAll());
 
-  //iterate through the repository looking for pokemons.
-  for(var i = 0; i < pokemonRepository.getAll().length; i++){
-    addListItem(pokemonRepository.getAll()[i]);
-    //using foreach
-    Object.keys(pokemonRepository.getAll()[i]).forEach(function(property) {
-      // dont repeat name
-      // todo: if name already exists, remove it.
+  // call the loadList function in pokemonRepository which makes a request to the API to fetch and return the list of Pokemon.
+  pokemonRepository.loadList().then(function(){
+    // getAll returns pokemon array from pokemon repository then we call the 'forEach' function on the array
+    // which then references each object as the object 'pokemon'.
+    // it then adds that pokemon as a list item to our UI.
+    pokemonRepository.getAll().forEach(function(pokemon){
+      addListItem(pokemon);
     });
-  }
-
-  // once we know we have added all the available pokemons, it is safe to delete our original $pokemonTemplatedItem
-  // delete our original list item because aint nobody got time for that.
-  $listItem.parentElement.removeChild($listItem);
+  });

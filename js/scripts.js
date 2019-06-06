@@ -19,17 +19,16 @@ var pokemonRepository = (function () {
   var apiUrl = SITE_PROTOCOL + SITE_ADDRESS + SITE_API_PATH + SITE_ENDPOINT_POKEMON + SITE_PARAMETER_LIMIT + MAX_POKEMONS;
 
 
-  function loadDetails(item) {
-    var url = item.detailsUrl;
+  function loadDetails(pokemon) {
+    var url = pokemon.detailsUrl;
     return fetch(url).then(function (response) {
       return response.json();
     }).then(function (details) {
       // Now we add the details to the item
-      item.imageUrl = details.sprites.front_default;
-      item.height = details.height;
-      item.type = Object.keys(details.types);
-      console.log(typeof(item.type));
-      console.log(details.types);
+      pokemon.imageUrl = details.sprites.front_default;
+      pokemon.height = details.height;
+      pokemon.types = details.types;
+      return pokemon;
     }).catch(function (e) {
       console.error(e);
     });
@@ -45,7 +44,7 @@ var pokemonRepository = (function () {
           name: item.name,
           detailsUrl: item.url,
           height: -1,
-          type: Object.keys({})
+          types: Object.keys({})
         };
         add(pokemon);
       })
@@ -85,8 +84,7 @@ var pokemonRepository = (function () {
 
 function showDetails(pokemon){
   pokemonRepository.loadDetails(pokemon).then(function (){
-    var type = pokemon.type;
-    console.log("name: " + pokemon.name + ", height: " + pokemon.height + ", type: " + pokemon.type + "");
+    console.log("name: " + pokemon.name + ", height: " + pokemon.height + ", type: " + pokemon.types[0].type.name + "");
   });
 };
 

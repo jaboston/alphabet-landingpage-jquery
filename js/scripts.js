@@ -30,17 +30,18 @@ var pokemonRepository = (function() {
 
   function loadDetails(pokemon) {
     var url = pokemon.detailsUrl;
-    return fetch(url).then(function(response) {
-      return response.json();
-    }).then(function(details) {
-      // Now we add the details to the item
-      pokemon.imageUrl = details.sprites.front_default;
-      pokemon.height = details.height;
-      pokemon.types = details.types;
-      return pokemon;
-    }).catch(function(e) {
-      console.error(e);
-    });
+    return $.get(url, function() {
+        console.log('getting details from ' + url);
+      })
+      .done(function(details) {
+        // Now we add the details to the item
+        pokemon.imageUrl = details.sprites.front_default;
+        pokemon.height = details.height;
+        pokemon.types = details.types;
+        return pokemon;
+      }).fail(function(e) {
+        console.error(e);
+      });
   };
 
   function loadList() {

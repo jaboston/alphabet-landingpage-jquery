@@ -8,14 +8,14 @@ function modal(shouldShowModal,
   imageUrl, extraUrl) {
 
   var $modalContainer = $('#modal-container');
-  var $modal = $(
+  var $baseModal = $(
     '<div class="modal created rubberBand animated">Content is here!</div>'
   );
 
   console.log("start loading the page");
   // testing modal container
 
-  function showModal(title, text, secondaryText, imageUrl, extraUrl) {
+  function showModal() {
     // Clear all existing modal content
     $('#modal-container').innerHTML = '';
 
@@ -36,26 +36,26 @@ function modal(shouldShowModal,
     var image = $("<img class='pokemon-image'></img>");
     image.src = imageUrl;
 
-    $modal.append(closeButtonElement);
-    $modal.append(titleElement);
-    $modal.append(contentElement);
-    $modal.append(content2Element);
-    $modal.append(image)
-    if ($modal.parentElement !== $('#modal-container')) {
-      $('#modal-container').append(modal);
+    $baseModal.append(closeButtonElement);
+    $baseModal.append(titleElement);
+    $baseModal.append(contentElement);
+    $baseModal.append(content2Element);
+    $baseModal.append(image)
+    if ($baseModal.parentElement !== $('#modal-container')) {
+      $('#modal-container').append($baseModal);
     }
     $('#modal-container').addClass('is-visible');
   }
 
   // a subtype of showModal.
-  function showDialog(title, text, secondaryText, imageUrl, extraUrl) {
-    showModal(title, text, secondaryText, imageUrl, extraUrl);
+  function showDialog() {
+    showModal();
     // We want to add a confirm and cancel button to the modal
 
     var confirmButton = $(
       "<button class='modal-confirm'>Show more details</button>");
 
-    $modal.append(confirmButton);
+    $baseModal.append(confirmButton);
 
     // We want to focus the confirmButton so that the user can simply press Enter
     confirmButton.focus();
@@ -77,8 +77,8 @@ function modal(shouldShowModal,
     var $modalContainer = $('#modal-container');
     $('#modal-container').removeClass('is-visible');
     $('#modal-container').empty();
-    $modal.empty();
-    $modalContainer.remove($modal);
+    $baseModal.empty();
+    $modalContainer.remove($baseModal);
     console.log($('#modal-container').children().length);
   }
 
@@ -109,8 +109,10 @@ function modal(shouldShowModal,
     }
   });
 
-  if (shouldShowModal) showModal(title, text, secondaryText, imageUrl, extraUrl);
-  if (shouldShowDialog) showDialog(title, text, secondaryText, imageUrl,
-    extraUrl);
-
+  if (shouldShowModal) {
+    showModal();
+  }
+  if (shouldShowDialog) {
+    showDialog();
+  }
 }

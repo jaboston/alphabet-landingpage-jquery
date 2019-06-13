@@ -100,8 +100,9 @@ function showDetails(pokemon) {
     } else {
       secondaryText = pokemon.height + ' inches... such a wittle pokeman.'
     }
+    console.log("show modal");
     modal(false, true, pokemon.name, 'type: ' + pokemon.types[0].type.name,
-      secondaryText, pokemon.imageUrl, pokemon.detailsUrl);
+      secondaryText, pokemon.imageUrl, pokemon.detailsUrl).showModal();
   });
 };
 
@@ -126,6 +127,7 @@ function addListItem(pokemon) {
 
     $pokemonTemplatedButton.addEventListener('click', function() {
       // we need to referenence a pokemon outside of this function just above.
+      console.log("show details");
       showDetails(pokemon);
     });
 

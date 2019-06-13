@@ -102,7 +102,7 @@ function showDetails(pokemon) {
     }
     console.log("show modal");
     modal(false, true, pokemon.name, 'type: ' + pokemon.types[0].type.name,
-      secondaryText, pokemon.imageUrl, pokemon.detailsUrl).showModal();
+      secondaryText, pokemon.imageUrl, pokemon.detailsUrl);
   });
 };
 

@@ -19,6 +19,8 @@ function modal(shouldShowModal,
     // Clear all existing modal content
     $('#modal-container').innerHTML = '';
 
+    console.log("show modal is called: " + title + ", text:  " + text +
+      ", secondary text: " + secondaryText + ", imageUrl: " + imageUrl);
     // Add the new modal content
     var closeButtonElement = $(
       '<button class="modal-close">Close</button>');
@@ -41,7 +43,7 @@ function modal(shouldShowModal,
     $baseModal.append(contentElement);
     $baseModal.append(content2Element);
     $baseModal.append(image)
-    if ($baseModal.parentElement !== $('#modal-container')) {
+    if (!($baseModal.parentElement == $('#modal-container'))) {
       $('#modal-container').append($baseModal);
     }
     $('#modal-container').addClass('is-visible');

@@ -106,7 +106,7 @@ function modal(shouldShowModal,
     // Since this is also triggered when clicking INSIDE the modal container,
     // We only want to close if the user clicks directly on the overlay
     var target = e.target;
-    if (target === $('#modal-container')) {
+    if (target.getAttribute('id') == 'modal-container') {
       hideModal();
     }
   });

@@ -9,7 +9,7 @@ function modal(shouldShowModal,
 
   var $modalContainer = $('#modal-container');
   var $baseModal = $(
-    '<div class="modal created rubberBand animated">Content is here!</div>'
+    '<div class="modal created rubberBand animated"></div>'
   );
 
   console.log("start loading the page");
@@ -17,6 +17,7 @@ function modal(shouldShowModal,
 
   function showModal() {
     // Clear all existing modal content
+    $('#modal-container').empty();
     $('#modal-container').innerHTML = '';
 
     console.log("show modal is called: " + title + ", text:  " + text +
@@ -26,16 +27,16 @@ function modal(shouldShowModal,
       '<button class="modal-close">Close</button>');
     closeButtonElement.on('click', hideModal);
 
-    var titleElement = $('<h1></h1>');
+    var titleElement = $('<h1>' + title + '</h1>');
     titleElement.innerText = title;
 
-    var contentElement = $('<p></p>');
+    var contentElement = $('<p>' + text + '</p>');
     contentElement.innerText = text;
 
-    var content2Element = $('<p></p>');
+    var content2Element = $('<p>' + secondaryText + '</p>');
     content2Element.innerText = secondaryText;
 
-    var image = $("<img class='pokemon-image'></img>");
+    var image = $("<img class='pokemon-image' src=" + imageUrl + "></img>");
     image.src = imageUrl;
 
     $baseModal.append(closeButtonElement);
@@ -77,10 +78,11 @@ function modal(shouldShowModal,
 
   function hideModal() {
     var $modalContainer = $('#modal-container');
-    $('#modal-container').removeClass('is-visible');
-    $('#modal-container').empty();
     $baseModal.empty();
     $modalContainer.remove($baseModal);
+    $modalContainer.empty();
+    $('#modal-container').removeClass('is-visible');
+    $('#modal-container').empty();
     console.log($('#modal-container').children().length);
   }
 

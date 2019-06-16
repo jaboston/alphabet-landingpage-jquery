@@ -9,8 +9,9 @@ function modal(shouldShowModal,
 
   var $modalContainer = $('#modal-container');
   var $baseModal = $(
-    '<div class="modal created rubberBand animated"></div>'
+    ''
   );
+  // <div class="modal created rubberBand animated" tabindex="-1" role="dialog"><div class="modal-dialog" role="document"><div class="modal-content"><div class="modal-header"></div></div></div></div>
 
   console.log("start loading the page");
   // testing modal container
@@ -24,26 +25,30 @@ function modal(shouldShowModal,
       ", secondary text: " + secondaryText + ", imageUrl: " + imageUrl);
     // Add the new modal content
     var closeButtonElement = $(
-      '<button class="modal-close">Close</button>');
+      '<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>'
+    );
     closeButtonElement.on('click', hideModal);
 
-    var titleElement = $('<h1>' + title + '</h1>');
+    var titleElement = $('<h1 class="modal-title">' + title + '</h1>');
     titleElement.innerText = title;
 
-    var contentElement = $('<p>' + text + '</p>');
+    var contentElement = $('<p class="modal-content">' + text + '</p>');
     contentElement.innerText = text;
 
-    var content2Element = $('<p>' + secondaryText + '</p>');
+    var content2Element = $('<p class="modal-body">' + secondaryText + '</p>');
     content2Element.innerText = secondaryText;
 
     var image = $("<img class='pokemon-image' src=" + imageUrl + "></img>");
     image.src = imageUrl;
 
-    $baseModal.append(closeButtonElement);
-    $baseModal.append(titleElement);
-    $baseModal.append(contentElement);
-    $baseModal.append(content2Element);
-    $baseModal.append(image)
+    $('#modal-container').load('modal.html');
+
+    $('.modal-content').append(closeButtonElement);
+    $('.modal-content').append(titleElement);
+    $('.modal-content').append(contentElement);
+    $('.modal-content').append(content2Element);
+    $('.modal-content').append(image)
+
     if (!($baseModal.parentElement == $('#modal-container'))) {
       $('#modal-container').append($baseModal);
     }

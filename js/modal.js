@@ -25,7 +25,7 @@ function modal(shouldShowModal,
       ", secondary text: " + secondaryText + ", imageUrl: " + imageUrl);
     // Add the new modal content
     var closeButtonElement = $(
-      '<button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>'
+      '<button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#exampleModal" aria-label="Close"></button>'
     );
     closeButtonElement.on('click', hideModal);
 

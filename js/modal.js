@@ -118,10 +118,11 @@ function modal(shouldShowModal,
     }
   });
 
-  $('[data-toggle="modal"]').on('click', function() {
-    var targetSelector = $(this).attr('data-target');
-    $(targetSelector).modal('show'); // Bootstrap’s own function to make the modal appear
-  });
+
+  // $('[data-toggle="modal"]').on('click', function() {
+  //   var targetSelector = $(this).attr('data-target');
+  //   $(targetSelector).modal('show'); // Bootstrap’s own function to make the modal appear
+  // });
 
   if (shouldShowModal) {
     showModal();

@@ -29,17 +29,28 @@ function modal(shouldShowModal,
     );
     closeButtonElement.on('click', hideModal);
 
+    $('.modal-title').html(title);
+
     var titleElement = $('<h1 class="modal-title">' + title + '</h1>');
     titleElement.innerText = title;
 
     var contentElement = $('<p class="modal-content">' + text + '</p>');
     contentElement.innerText = text;
 
-    var content2Element = $('<p class="modal-body">' + secondaryText + '</p>');
+    var content2Element = $('<p class="modal-content2">' + secondaryText +
+      '</p>');
     content2Element.innerText = secondaryText;
+    $('.modal-body').empty();
+    $('.modal-body').append(contentElement);
+    $('.modal-body').append(content2Element);
+    $('.modal-body').append(image);
+
+
 
     var image = $("<img class='pokemon-image' src=" + imageUrl + "></img>");
     image.src = imageUrl;
+    $('.modal-footer').empty();
+    $('.modal-footer').append(image);
 
     // $('.modal-content').append(closeButtonElement);
     // $('.modal-content').append(titleElement);

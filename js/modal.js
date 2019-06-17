@@ -110,16 +110,6 @@ function modal(shouldShowModal,
   }
 
 
-  $('.button--pokemon').on('click', (e) => {
-    e.preventDefault();
-    showDialog('Confirm action', 'Are you sure you want to do this?').then(
-      function() {
-        alert('confirmed');
-      }, () => {
-
-      });
-  });
-
   $(window).on('keydown', (e) => {
     if (e.key === 'Escape' && $modalContainer.hasClass(
         'is-visible')) {

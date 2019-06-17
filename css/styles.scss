@@ -303,6 +303,11 @@ h3 {
   text-align: left;
 }
 
+.list-group-item {
+  color: var(--item-background-color);
+  background-color: var(--item-background-color);
+}
+
 .modal-close {
   float: right;
   -webkit-appearance: none;

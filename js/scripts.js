@@ -122,8 +122,12 @@ function addListItem(pokemon) {
 
     // set our row based on the pokemon properties. We already checked that pokemon name is a type of string in this
     $pokemonTemplatedButton.innerText = pokemon.name;
+    $pokemonTemplatedButton.classList.add('list-group-item');
+    $pokemonTemplatedButton.classList.add('list-group-item-dark');
+
     $pokemonTemplatedItem.insertBefore($pokemonTemplatedButton,
       $pokemonTemplatedItem.firstElementChild);
+
 
     $pokemonTemplatedButton.addEventListener('click', function() {
       // we need to referenence a pokemon outside of this function just above.

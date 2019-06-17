@@ -41,7 +41,7 @@ function modal(shouldShowModal,
     var image = $("<img class='pokemon-image' src=" + imageUrl + "></img>");
     image.src = imageUrl;
 
-    $('#modal-container').load('modal.html');
+    $(window).load('modal.html');
 
     $('.modal-content').append(closeButtonElement);
     $('.modal-content').append(titleElement);

@@ -156,6 +156,10 @@ charmander = {
   type: ['fire']
 };
 
+// make container visible
+$('.modal').load(
+  'https://jaboston.github.io/alphabet-landingpage-jquery/modal.html');
+
 console.log(pokemonRepository.getAll());
 
 // call the loadList function in pokemonRepository which makes a request to the API to fetch and return the list of Pokemon.

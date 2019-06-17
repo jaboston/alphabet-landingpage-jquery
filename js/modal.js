@@ -41,18 +41,15 @@ function modal(shouldShowModal,
     var image = $("<img class='pokemon-image' src=" + imageUrl + "></img>");
     image.src = imageUrl;
 
-    $(window).load('modal.html');
-
-    $('.modal-content').append(closeButtonElement);
-    $('.modal-content').append(titleElement);
-    $('.modal-content').append(contentElement);
-    $('.modal-content').append(content2Element);
-    $('.modal-content').append(image)
+    // $('.modal-content').append(closeButtonElement);
+    // $('.modal-content').append(titleElement);
+    // $('.modal-content').append(contentElement);
+    // $('.modal-content').append(content2Element);
+    // $('.modal-content').append(image)
 
     if (!($baseModal.parentElement == $('#modal-container'))) {
       $('#modal-container').append($baseModal);
     }
-    $('#modal-container').addClass('is-visible');
   }
 
   // a subtype of showModal.

@@ -298,6 +298,18 @@ h3 {
   background-color: var(--item-background-color);
 }
 
+.modal-confirm {
+  border: 0;
+  padding: var(--theme-default-padding);
+  background-color: var(--item-background-color);
+  :hover {
+    color: var(--primary-color);
+  }
+  :selected {
+    color: var(--primary-color);
+  }
+}
+
 .pokemon-image {
   display: block;
   margin-left: auto;

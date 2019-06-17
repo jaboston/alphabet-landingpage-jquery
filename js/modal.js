@@ -40,38 +40,19 @@ function modal(shouldShowModal,
     var content2Element = $('<p class="modal-content2">' + secondaryText +
       '</p>');
     content2Element.innerText = secondaryText;
+    var image = $("<img class='pokemon-image' src=" + imageUrl + "></img>");
+    image.src = imageUrl;
     $('.modal-body').empty();
     $('.modal-body').append(contentElement);
     $('.modal-body').append(content2Element);
     $('.modal-body').append(image);
 
-
-
-    var image = $("<img class='pokemon-image' src=" + imageUrl + "></img>");
-    image.src = imageUrl;
-    $('.modal-footer').empty();
-    $('.modal-footer').append(image);
-
-    // $('.modal-content').append(closeButtonElement);
-    // $('.modal-content').append(titleElement);
-    // $('.modal-content').append(contentElement);
-    // $('.modal-content').append(content2Element);
-    // $('.modal-content').append(image)
-
-    if (!($baseModal.parentElement == $('#modal-container'))) {
-      $('#modal-container').append($baseModal);
-    }
-  }
-
-  // a subtype of showModal.
-  function showDialog() {
-    showModal();
-    // We want to add a confirm and cancel button to the modal
-
     var confirmButton = $(
       "<button class='modal-confirm'>Show more details</button>");
 
-    $baseModal.append(confirmButton);
+    $('.modal-footer').empty();
+    $('.modal-footer').append(confirmButton);
+
 
     // We want to focus the confirmButton so that the user can simply press Enter
     confirmButton.focus();
@@ -86,6 +67,35 @@ function modal(shouldShowModal,
       // This can be used to reject from other functions
       dialogPromiseReject = reject;
     });
+
+    if (!($baseModal.parentElement == $('#modal-container'))) {
+      $('#modal-container').append($baseModal);
+    }
+  }
+
+  // a subtype of showModal.
+  function showDialog() {
+    showModal();
+    // We want to add a confirm and cancel button to the modal
+
+    // var confirmButton = $(
+    //   "<button class='modal-confirm'>Show more details</button>");
+    //
+    // $baseModal.append(confirmButton);
+    //
+    // // We want to focus the confirmButton so that the user can simply press Enter
+    // confirmButton.focus();
+    // // Return a promise that resolves when confirmed, else rejects
+    // return new Promise((resolve, reject) => {
+    //   confirmButton.on('click', () => {
+    //     dialogPromiseReject = null;
+    //     console.log('extra url: ' + extraUrl);
+    //     window.open(extraUrl, 'www.google.com');
+    //     resolve();
+    //   });
+    //   // This can be used to reject from other functions
+    //   dialogPromiseReject = reject;
+    // });
   }
   var dialogPromiseReject; // This can be set later, by showDialog
 
